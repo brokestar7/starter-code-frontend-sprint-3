@@ -107,6 +107,7 @@ function generateCart() {
       cart[i].quantity = 1;
     }
   }
+  // todo no funciona el "cart[i]" sale undefined
 }
 
 // Exercise 5
