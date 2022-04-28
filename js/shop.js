@@ -67,22 +67,46 @@ var total = 0;
 function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cartList array
-  
-  
+  for(let i=0;i<products.length;i++){
+    if(i==id){
+      cartList.push(products[id-1]);
+    }
+
+    generateCart();
+  }
+  console.log(cartList)
 }
 
 // Exercise 2
-function cleanCart() {}
+function cleanCart() {
+  cartList = [];
+}
 
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
+  for(let i=0;i<cartList.length;i++){
+    total += cartList[i].price;
+  }
 }
 
 // Exercise 4
 function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+  for(let i=0;i<cartList.length;i++){
+    if(cart[i] ==='undefined'){
+      cart.push(cartList[i])
+      cart[i].quantity = 1;
+    }
+    else if(cartList[i].id==cart[i].id){
+      cart[i].quantity + 1;
+    }
+    else{
+      cart.push(cartList[i])
+      cart[i].quantity = 1;
+    }
+  }
 }
 
 // Exercise 5
