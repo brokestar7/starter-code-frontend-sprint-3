@@ -71,9 +71,7 @@ function buy(id) {
     if(i==id){
       cartList.push(products[id-1]);
     }
-
   }
-  generateCart();
 }
 
 // Exercise 2
@@ -93,23 +91,38 @@ function calculateTotal() {
 function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+  cart = [];
   for(let i=0;i<cartList.length;i++){
     if(cart.length == 0){
       cart.push(cartList[i])
       cart[cart.length-1].quantity = 1;
+      cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+      cart[cart.length-1].subtotalWithDiscount = 0;
     }
     else if(cart.includes(cartList[i])){
       cart[cart.indexOf(cartList[i])].quantity +=1;
+      cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
     }
     else{
       cart.push(cartList[i])
       cart[cart.length-1].quantity = 1;
+      cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+      cart[cart.length-1].subtotalWithDiscount = 0;
     }
   }
+  applyPromotionsCart();
 }
 
 // Exercise 5
 function applyPromotionsCart() {
+  for(let i=0;i<cart.length;i++){
+    if(cart[i].id == 1 && cart[i].quantity >=3){
+      cart[i].subtotalWithDiscount = cart[i].subtotal - cart[i].subtotal * 0.2;
+    }
+    else if(cart[i].id == 3 && cart[i].quantity >=10){
+      cart[i].subtotalWithDiscount = cart[i].subtotal - cart[i].subtotal * 0.3;
+    }
+  }
   // Apply promotions to each item in the array "cart"
 }
 
