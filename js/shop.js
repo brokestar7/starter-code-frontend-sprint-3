@@ -72,9 +72,8 @@ function buy(id) {
       cartList.push(products[id-1]);
     }
 
-    generateCart();
   }
-  console.log(cartList)
+  generateCart();
 }
 
 // Exercise 2
@@ -95,19 +94,18 @@ function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
   for(let i=0;i<cartList.length;i++){
-    if(cart[i] ==='undefined'){
+    if(cart.length == 0){
       cart.push(cartList[i])
-      cart[i].quantity = 1;
+      cart[cart.length-1].quantity = 1;
     }
-    else if(cartList[i].id==cart[i].id){
-      cart[i].quantity + 1;
+    else if(cart.includes(cartList[i])){
+      cart[cart.indexOf(cartList[i])].quantity +=1;
     }
     else{
       cart.push(cartList[i])
-      cart[i].quantity = 1;
+      cart[cart.length-1].quantity = 1;
     }
   }
-  // todo no funciona el "cart[i]" sale undefined
 }
 
 // Exercise 5
