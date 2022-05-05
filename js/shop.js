@@ -64,15 +64,15 @@ var cart = [];
 var total = 0;
 
 // Exercise 1
-function buy(id) {
+// function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cartList array
-  for(let i=0;i<products.length;i++){
-    if(i==id){
-      cartList.push(products[id-1]);
-    }
-  }
-}
+//   for(let i=0;i<products.length;i++){
+//     if(i==id){
+//       cartList.push(products[id-1]);
+//     }
+//   }
+// }
 
 // Exercise 2
 function cleanCart() {
@@ -130,9 +130,31 @@ function applyPromotionsCart() {
 
 // Exercise 7
 function addToCart(id) {
+  cart = [];
   // Refactor previous code in order to simplify it
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+  for(let i=0;i<products.length;i++){
+    if(i==id){
+      if(cart.length == 0){
+        cart.push(products[id-1])
+        cart[cart.length-1].quantity = 1;
+        cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+        cart[cart.length-1].subtotalWithDiscount = 0;
+      }
+      else if(cart.includes(cartList[i])){
+        cart[cart.indexOf(cartList[i])].quantity +=1;
+        cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+      }
+      else{
+        cart.push(cartList[i])
+        cart[cart.length-1].quantity = 1;
+        cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+        cart[cart.length-1].subtotalWithDiscount = 0;
+      }
+      cartList.push(products[id-1]);
+    }
+  }
 }
 
 // Exercise 8
