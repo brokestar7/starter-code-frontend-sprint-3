@@ -64,7 +64,8 @@ var cart = [];
 var total = 0;
 
 // Exercise 1
-// function buy(id) {
+function buy(id) {
+  addToCart(id);
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cartList array
 //   for(let i=0;i<products.length;i++){
@@ -72,7 +73,7 @@ var total = 0;
 //       cartList.push(products[id-1]);
 //     }
 //   }
-// }
+}
 
 // Exercise 2
 function cleanCart() {
@@ -88,30 +89,30 @@ function calculateTotal() {
 }
 
 // Exercise 4
-function generateCart() {
+// function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-  cart = [];
-  for(let i=0;i<cartList.length;i++){
-    if(cart.length == 0){
-      cart.push(cartList[i])
-      cart[cart.length-1].quantity = 1;
-      cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
-      cart[cart.length-1].subtotalWithDiscount = 0;
-    }
-    else if(cart.includes(cartList[i])){
-      cart[cart.indexOf(cartList[i])].quantity +=1;
-      cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
-    }
-    else{
-      cart.push(cartList[i])
-      cart[cart.length-1].quantity = 1;
-      cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
-      cart[cart.length-1].subtotalWithDiscount = 0;
-    }
-  }
-  applyPromotionsCart();
-}
+//   cart = [];
+//   for(let i=0;i<cartList.length;i++){
+//     if(cart.length == 0){
+//       cart.push(cartList[i])
+//       cart[cart.length-1].quantity = 1;
+//       cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+//       cart[cart.length-1].subtotalWithDiscount = 0;
+//     }
+//     else if(cart.includes(cartList[i])){
+//       cart[cart.indexOf(cartList[i])].quantity +=1;
+//       cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+//     }
+//     else{
+//       cart.push(cartList[i])
+//       cart[cart.length-1].quantity = 1;
+//       cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
+//       cart[cart.length-1].subtotalWithDiscount = 0;
+//     }
+//   }
+//   applyPromotionsCart();
+// }
 
 // Exercise 5
 function applyPromotionsCart() {
@@ -130,37 +131,47 @@ function applyPromotionsCart() {
 
 // Exercise 7
 function addToCart(id) {
-  cart = [];
   // Refactor previous code in order to simplify it
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cart array or update its quantity in case it has been added previously.
   for(let i=0;i<products.length;i++){
-    if(i==id){
+    if(i==id-1){  // Este if se encarga de encontrar el objeto en la array sumando en la i hasta que coincida con la id.
       if(cart.length == 0){
         cart.push(products[id-1])
         cart[cart.length-1].quantity = 1;
         cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
         cart[cart.length-1].subtotalWithDiscount = 0;
       }
-      else if(cart.includes(cartList[i])){
-        cart[cart.indexOf(cartList[i])].quantity +=1;
+      else if(cart.includes(products[id-1])){
+        cart[cart.indexOf(products[id-1])].quantity +=1;
         cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
       }
       else{
-        cart.push(cartList[i])
+        cart.push(products[id-1])
         cart[cart.length-1].quantity = 1;
         cart[cart.length-1].subtotal = cart[cart.length-1].quantity * cart[cart.length-1].price;
         cart[cart.length-1].subtotalWithDiscount = 0;
       }
-      cartList.push(products[id-1]);
     }
   }
+  applyPromotionsCart();
 }
 
 // Exercise 8
 function removeFromCart(id) {
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cartList array
+  for(let i=0;i<cart.length;i++){
+    if(cart[i].id==id){ 
+      if(cart[i].quantity<=1){
+        cart.splice(i,1);
+      }
+      else{
+        cart[i].quantity -= 1;
+      }
+    }
+  }
+  applyPromotionsCart();
 }
 
 // Exercise 9
