@@ -11,15 +11,22 @@ var errorPhone = document.getElementById("errorPhone");
 // Exercise 6
 function validate(event) {
   // Validate fields entered by the user: name, phone, password, and email
-  // event.preventDefault();
+  // event.preventDefault();  
   let name = document.getElementById("fName").value;
-  if(name.length <=3 ){
-    name.classList.add("is-invalid");
-    return
+  let formN = document.getElementById("fName");
+  if(name.length <3 ){
+    formN.classList.remove("is-valid");
+    formN.classList.add("is-invalid");
+    return;
   }
   else{
-    name.classList.add("is-valid");
-    return
+    formN.classList.remove("is-invalid");
+    formN.classList.add("is-valid");
+    return;
   }
+  // ---------
+
+  
+  
 
 }
